@@ -437,27 +437,30 @@
         // Ensure we have 20 topics by duplicating for demo if needed, but structure is ready.
         let currentTopic = TOPICS_DATA[0];
 
-        // ==================== FIREBASE INIT ====================
+        // ==================== FIREBASE INIT & FALLBACKS ====================
         async function initFirebase() {
             try {
                 if (typeof __firebase_config !== 'undefined') {
                     const config = JSON.parse(__firebase_config);
                     
-                    // ПРОБЛЕМА: Конфликт ключей (если выдан ключ 'aq...' вместо 'AIza...') вызывает 404 ошибку.
-                    // Если ключ некорректен, принудительно переключаемся на локальное хранилище.
                     if (config.apiKey && !config.apiKey.startsWith('AIza')) {
-                        console.warn("Обнаружен некорректный API ключ среды. Переход в локальный режим для предотвращения 404 ошибки.");
-                        throw new Error("Invalid API key format");
+                        console.warn("Обнаружен некорректный API ключ. Включаем Офлайн-режим.");
+                        throw new Error("Invalid API key");
                     }
 
                     app = initializeApp(config);
                     db = getFirestore(app);
                     auth = getAuth(app);
                     
-                    if (typeof __initial_auth_token !== 'undefined') {
-                        await signInWithCustomToken(auth, __initial_auth_token);
-                    } else {
-                        await signInAnonymously(auth);
+                    try {
+                        if (typeof __initial_auth_token !== 'undefined') {
+                            await signInWithCustomToken(auth, __initial_auth_token);
+                        } else {
+                            await signInAnonymously(auth);
+                        }
+                    } catch (authErr) {
+                        console.warn("Ошибка авторизации Firebase (возможно 404/400). Переход в Офлайн-режим.", authErr);
+                        throw authErr;
                     }
                     
                     isFirebaseReady = true;
@@ -467,42 +470,68 @@
                     throw new Error("No Firebase config found");
                 }
             } catch (err) {
-                console.warn("Firebase Auth Error / Conflict:", err.message);
-                isFirebaseReady = false;
-                document.getElementById('header-status').innerText = "Сборник рабочих листов (Локальный режим / Офлайн)";
-                loadLocalSubmissions();
+                fallbackToLocalMode();
             }
+        }
+
+        function fallbackToLocalMode() {
+            isFirebaseReady = false;
+            document.getElementById('header-status').innerText = "Сборник рабочих листов (Локальный режим / Офлайн)";
+            loadLocalSubmissions();
         }
 
         function listenToSubmissions() {
             if (!isFirebaseReady || !auth.currentUser) return;
             const subsRef = collection(db, 'artifacts', appId, 'public', 'data', 'submissions');
             
-            onSnapshot(subsRef, (snapshot) => {
-                globalSubmissions = [];
-                snapshot.forEach(doc => {
-                    globalSubmissions.push({ id: doc.id, ...doc.data() });
+            try {
+                onSnapshot(subsRef, (snapshot) => {
+                    globalSubmissions = [];
+                    snapshot.forEach(doc => {
+                        globalSubmissions.push({ id: doc.id, ...doc.data() });
+                    });
+                    globalSubmissions.sort((a, b) => b.timestampRaw - a.timestampRaw);
+                    renderTeacherTable();
+                }, (error) => {
+                    console.warn("Ошибка базы данных Firestore (404/Permissions):", error);
+                    fallbackToLocalMode();
                 });
-                // Sort by timestamp descending
-                globalSubmissions.sort((a, b) => b.timestampRaw - a.timestampRaw);
-                renderTeacherTable();
-            }, (error) => {
-                console.error("Firestore Error (404/Permissions):", error);
-                isFirebaseReady = false;
-                document.getElementById('header-status').innerText = "Сборник рабочих листов (Локальный режим / Офлайн)";
-                loadLocalSubmissions();
-            });
+            } catch (err) {
+                console.warn("Ошибка при попытке чтения БД:", err);
+                fallbackToLocalMode();
+            }
         }
 
         function loadLocalSubmissions() {
-            const saved = localStorage.getItem('aldar_kose_submissions');
-            if (saved) {
-                globalSubmissions = JSON.parse(saved);
-            } else {
+            try {
+                const saved = localStorage.getItem('aldar_kose_submissions');
+                if (saved) {
+                    globalSubmissions = JSON.parse(saved);
+                } else {
+                    globalSubmissions = [];
+                }
+                globalSubmissions.sort((a, b) => b.timestampRaw - a.timestampRaw);
+                renderTeacherTable();
+            } catch(e) {
                 globalSubmissions = [];
+                renderTeacherTable();
             }
-            globalSubmissions.sort((a, b) => b.timestampRaw - a.timestampRaw);
-            renderTeacherTable();
+        }
+
+        function saveLocally(data) {
+            if (!data.id) data.id = 'loc_' + Date.now() + Math.random().toString(36).substr(2, 5);
+            const idx = globalSubmissions.findIndex(s => s.id === data.id);
+            if (idx !== -1) {
+                globalSubmissions[idx] = data;
+            } else {
+                globalSubmissions.push(data);
+            }
+            try {
+                localStorage.setItem('aldar_kose_submissions', JSON.stringify(globalSubmissions));
+            } catch (e) {
+                console.error("Local storage is full or disabled.", e);
+            }
+            loadLocalSubmissions();
         }
 
         // ==================== UI SETUP & EVENTS ====================
@@ -738,13 +767,16 @@
 
             try {
                 if (isFirebaseReady) {
-                    const docRef = doc(collection(db, 'artifacts', appId, 'public', 'data', 'submissions'));
-                    await setDoc(docRef, submissionData);
+                    try {
+                        const docRef = doc(collection(db, 'artifacts', appId, 'public', 'data', 'submissions'));
+                        await setDoc(docRef, submissionData);
+                    } catch (fbError) {
+                        console.warn("Ошибка сохранения в облако, сохраняем локально:", fbError);
+                        saveLocally(submissionData);
+                        fallbackToLocalMode();
+                    }
                 } else {
-                    submissionData.id = 'loc_' + Date.now() + Math.random().toString(36).substr(2, 5);
-                    globalSubmissions.push(submissionData);
-                    localStorage.setItem('aldar_kose_submissions', JSON.stringify(globalSubmissions));
-                    loadLocalSubmissions();
+                    saveLocally(submissionData);
                 }
 
                 document.getElementById('result-score-badge').innerText = `${finalScore} / 10 баллов`;
@@ -753,7 +785,7 @@
                 document.getElementById('result-box').scrollIntoView({ behavior: 'smooth' });
             } catch (error) {
                 console.error(error);
-                showToast("Ошибка сохранения", "Не удалось отправить результат.", "❌");
+                showToast("Ошибка сохранения", "Сбой приложения. Проверьте консоль.", "❌");
                 btn.disabled = false;
                 document.getElementById('btn-submit-text').innerText = "Сдать работу Алдару көсе";
             }
@@ -834,18 +866,29 @@
 
             try {
                 if (isFirebaseReady) {
-                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'submissions', activeInspectorId);
-                    await updateDoc(docRef, {
-                        finalScore: newScore,
-                        teacherComment: comment
-                    });
+                    try {
+                        const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'submissions', activeInspectorId);
+                        await updateDoc(docRef, {
+                            finalScore: newScore,
+                            teacherComment: comment
+                        });
+                    } catch(fbError) {
+                        console.warn("Сбой обновления в облаке. Переход в локальный режим:", fbError);
+                        fallbackToLocalMode();
+                        // Обновляем локально после падения
+                        const idx = globalSubmissions.findIndex(s => s.id === activeInspectorId);
+                        if (idx !== -1) {
+                            globalSubmissions[idx].finalScore = newScore;
+                            globalSubmissions[idx].teacherComment = comment;
+                            saveLocally(globalSubmissions[idx]);
+                        }
+                    }
                 } else {
                     const idx = globalSubmissions.findIndex(s => s.id === activeInspectorId);
                     if (idx !== -1) {
                         globalSubmissions[idx].finalScore = newScore;
                         globalSubmissions[idx].teacherComment = comment;
-                        localStorage.setItem('aldar_kose_submissions', JSON.stringify(globalSubmissions));
-                        loadLocalSubmissions();
+                        saveLocally(globalSubmissions[idx]);
                     }
                 }
                 
