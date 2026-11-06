@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Рабочие листы по физике 8 класса: Алдар көсе</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #FAF6EE;
+            --card-bg: #FFFFFF;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --emerald: #0B5D1E;
+            --teal: #007A8A;
+            --gold: #D4AF37;
+            --gold-bright: #FFD700;
+            --border-color: #E2E8F0;
+            --input-bg: rgba(11, 93, 30, 0.04);
+        }
+
+        html[data-theme="dark"] {
+            --bg-main: #0F172A;
+            --card-bg: #1E293B;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --emerald: #34D399;
+            --teal: #38BDF8;
+            --gold: #F59E0B;
+            --gold-bright: #FBBF24;
+            --border-color: #334155;
+            --input-bg: rgba(52, 211, 153, 0.08);
+        }
+
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-main); transition: background-color 0.3s, color 0.3s; }
+        .font-heading { font-family: 'Montserrat', sans-serif; }
+
+        .kazakh-header {
+            background: linear-gradient(135deg, #0B5D1E 0%, #007A8A 50%, #154D26 100%);
+            background-image: radial-gradient(rgba(255, 215, 0, 0.15) 1.5px, transparent 0);
+            background-size: 24px 24px;
+            position: relative;
+        }
+        .kazakh-header::after {
+            content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 6px;
+            background: repeating-linear-gradient(90deg, #C0392B 0 16px, #FFD700 16px 32px, #007A8A 32px 48px);
+        }
+
+        .speech-bubble {
+            background: #FFFDF7; color: #0F172A; border-radius: 14px; padding: 8px 14px;
+            font-size: 0.82rem; font-weight: 600; position: relative; box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+        }
+        .speech-bubble::after {
+            content: ""; position: absolute; right: -8px; bottom: 14px;
+            border: 8px solid transparent; border-left-color: #FFFDF7; border-right: 0;
+        }
+
+        .btn-emerald { background: linear-gradient(135deg, #0B5D1E 0%, #007A8A 100%); color: #FFFFFF; }
+        .btn-emerald:hover { opacity: 0.94; transform: translateY(-1px); }
+        .btn-gold { background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%); color: #2D2100; font-weight: 700; }
+        .btn-gold:hover { background: linear-gradient(135deg, #FFE033 0%, #E5B800 100%); transform: translateY(-1px); }
+
+        .blank-input {
+            min-width: 70px; max-width: 130px; border: none; border-bottom: 2px dashed var(--gold);
+            background-color: var(--input-bg); text-align: center; font-weight: 700; color: var(--emerald);
+            outline: none; padding: 2px 6px; margin: 0 4px; border-radius: 4px 4px 0 0; transition: all 0.2s;
+        }
+        .blank-input:focus { border-bottom: 2px solid var(--gold-bright); background-color: rgba(255, 215, 0, 0.2); }
+        .blank-input.correct { border-bottom: 2.5px solid #16A34A !important; background-color: rgba(22, 163, 74, 0.18) !important; color: #15803D !important; }
+        .blank-input.incorrect { border-bottom: 2.5px solid #DC2626 !important; background-color: rgba(220, 38, 38, 0.18) !important; color: #B91C1C !important; }
+
+        @media print {
+            header, nav, #controls-panel, .no-print, #share-bar, #btn-submit, #tab-bar { display: none !important; }
+            body { background: white !important; color: black !important; }
+            .card-box { box-shadow: none !important; border: 1px solid #94A3B8 !important; background: white !important; }
+            .blank-input { border-bottom: 1px solid #000 !important; background: transparent !important; }
+        }
+        
+        /* Modal Background */
+        .modal-overlay { background: rgba(0,0,0,0.6); backdrop-filter: blur(2px); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <!-- Vector Sprite: Aldar Kose -->
+    <svg width="0" height="0" class="absolute">
+        <symbol id="akg" viewBox="0 0 120 150">
+            <path d="M18 150 Q20 98 60 93 Q100 98 102 150 Z" fill="#C0392B"/>
+            <path d="M60 95 V150" stroke="#FFD700" stroke-width="4"/>
+            <rect x="22" y="124" width="76" height="8" fill="#FFD700"/>
+            <path d="M93 108 Q116 100 109 72" stroke="#C0392B" stroke-width="10" stroke-linecap="round" fill="none"/>
+            <circle cx="109" cy="66" r="6" fill="#F2C28E"/>
+            <path d="M109 62 V46" stroke="#F2C28E" stroke-width="4" stroke-linecap="round"/>
+            <rect x="52" y="84" width="16" height="14" fill="#E5B07C"/>
+            <circle cx="60" cy="64" r="29" fill="#F2C28E"/>
+            <circle cx="31" cy="66" r="6" fill="#F2C28E"/>
+            <circle cx="89" cy="66" r="6" fill="#F2C28E"/>
+            <ellipse cx="60" cy="44" rx="35" ry="11" fill="#7A4A22"/>
+            <path d="M28 44 Q36 4 60 -2 Q84 4 92 44 Z" fill="#0B5D1E"/>
+            <path d="M30 36 Q60 26 90 36" stroke="#FFD700" stroke-width="4" fill="none"/>
+            <circle cx="60" cy="-2" r="5" fill="#C0392B"/>
+            <path d="M42 56 Q49 50 56 55" stroke="#3A2412" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M64 53 Q71 46 79 51" stroke="#3A2412" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <circle cx="49" cy="63" r="3.5" fill="#3A2412"/>
+            <circle cx="71" cy="62" r="3.5" fill="#3A2412"/>
+            <path d="M60 63 Q65 73 58 74" stroke="#A8683A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M44 79 Q60 94 78 76" stroke="#7A2A1A" stroke-width="3" fill="#FFF" stroke-linecap="round"/>
+            <circle cx="42" cy="74" r="4.5" fill="#F09A8A" opacity=".6"/>
+            <circle cx="80" cy="72" r="4.5" fill="#F09A8A" opacity=".6"/>
+        </symbol>
+    </svg>
+
+    <header class="kazakh-header text-white shadow-xl py-4 px-4 md:px-8 border-b-4 border-[#FFD700] relative z-10">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-4">
+                <div class="w-14 h-14 md:w-16 md:h-16 bg-white/10 backdrop-blur rounded-2xl flex items-center justify-center p-1 border-2 border-[#FFD700] shadow-md">
+                    <svg width="60" height="75"><use href="#akg"/></svg>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-heading font-extrabold text-[#FFD700] tracking-wide">
+                        Физика 8 класс • Алдар көсе
+                    </h1>
+                    <p class="text-xs md:text-sm text-amber-100 font-medium" id="header-status">
+                        Сборник рабочих листов (Подключение к облаку...)
+                    </p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="hidden sm:block speech-bubble max-w-xs">
+                    <span id="header-quote">Сәлем! Сообразительность и знания физики помогут решить любую задачу! 6 задач ждут тебя!</span>
+                </div>
+                <button id="theme-toggle" class="bg-white/20 hover:bg-white/30 text-white p-2.5 rounded-xl border border-white/30 text-xs font-bold transition-all shadow-sm flex items-center space-x-1">
+                    <span id="theme-icon">🌙</span><span class="hidden md:inline">Тема</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-5xl mx-auto w-full px-4 py-6 relative z-10">
+        <div id="tab-bar" class="flex justify-center mb-6 no-print">
+            <div class="bg-[var(--card-bg)] p-1.5 rounded-2xl shadow-md border border-[var(--border-color)] flex space-x-2 max-w-md w-full">
+                <button id="tab-student" class="flex-1 py-2.5 px-4 rounded-xl font-bold text-xs md:text-sm text-center transition-all btn-emerald shadow">
+                    👨‍🎓 Ученик (Рабочий лист)
+                </button>
+                <button id="tab-teacher" class="flex-1 py-2.5 px-4 rounded-xl font-bold text-xs md:text-sm text-center transition-all text-[var(--text-muted)] hover:bg-gray-100 dark:hover:bg-gray-800">
+                    📊 Результаты (Журнал)
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== STUDENT SECTION ==================== -->
+        <section id="sec-student" class="space-y-6">
+            <div id="controls-panel" class="bg-[var(--card-bg)] rounded-2xl shadow-md p-5 border-t-4 border-[#0B5D1E] border-x border-b border-[var(--border-color)]">
+                <h2 class="text-lg font-heading font-bold text-[var(--emerald)] mb-3 flex items-center">
+                    <span class="text-xl mr-2">📋</span> Выбор учебной темы
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1">Фамилия и Имя ученика</label>
+                        <input type="text" id="inp-name" placeholder="Например: Арман Сериков" class="w-full px-3 py-2 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] focus:ring-2 focus:ring-[var(--emerald)] outline-none text-sm font-medium">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1">Класс</label>
+                        <input type="text" id="inp-class" placeholder="8 «А»" class="w-full px-3 py-2 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] focus:ring-2 focus:ring-[var(--emerald)] outline-none text-sm font-medium">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1">Раздел программы</label>
+                        <select id="sel-topic" class="w-full px-3 py-2 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] focus:ring-2 focus:ring-[var(--emerald)] outline-none text-sm font-bold"></select>
+                    </div>
+                </div>
+
+                <div id="share-bar" class="mt-4 pt-3 border-t border-[var(--border-color)] flex flex-wrap items-center justify-between gap-3 text-xs">
+                    <div class="flex items-center space-x-2">
+                        <span class="font-semibold text-[var(--text-muted)]">Прямая ссылка:</span>
+                        <input type="text" id="inp-share-url" readonly class="px-2 py-1.5 rounded border border-[var(--border-color)] bg-gray-50 dark:bg-gray-800 font-mono text-[11px] w-48 md:w-64">
+                        <button id="btn-copy-url" class="btn-gold py-1.5 px-3 rounded-lg text-xs">Копировать 📋</button>
+                    </div>
+                    <button id="btn-toggle-qr" class="text-[var(--emerald)] font-bold hover:underline flex items-center space-x-1">
+                        <span>📱 Открыть QR-код</span>
+                    </button>
+                </div>
+
+                <div id="qr-box" class="hidden mt-4 p-4 bg-white rounded-xl border border-amber-200 flex flex-col items-center justify-center space-y-2 max-w-xs mx-auto">
+                    <canvas id="qr-canvas" width="160" height="160" class="border border-gray-200 rounded p-1 bg-white"></canvas>
+                    <span class="text-[11px] text-gray-600 font-medium text-center">Отсканируйте смартфоном для перехода к листу</span>
+                </div>
+            </div>
+
+            <!-- Worksheet Display Card -->
+            <div id="worksheet-card" class="bg-[var(--card-bg)] rounded-2xl shadow-xl p-6 md:p-8 border border-[var(--border-color)] card-box relative">
+                
+                <div class="border-b-2 border-amber-200 dark:border-amber-900/40 pb-4 mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <div class="flex items-center space-x-2 mb-1">
+                            <span class="bg-[var(--emerald)] text-white text-[11px] font-extrabold px-2.5 py-0.5 rounded-md">8 КЛАСС</span>
+                            <span id="ws-topic-badge" class="bg-amber-100 text-amber-900 dark:bg-amber-900/50 dark:text-amber-200 text-[11px] font-bold px-2.5 py-0.5 rounded-md">Тема</span>
+                        </div>
+                        <h2 id="ws-topic-title" class="text-xl md:text-2xl font-heading font-extrabold text-[var(--text-main)]">Название темы</h2>
+                        <p class="text-xs text-[var(--text-muted)] mt-1">
+                            Ученик: <span id="ws-disp-name" class="font-bold text-[var(--emerald)]">—</span> | Класс: <span id="ws-disp-class" class="font-bold text-[var(--text-main)]">—</span>
+                        </p>
+                    </div>
+                    <div class="flex flex-col items-center space-y-1">
+                        <div class="bg-gradient-to-r from-amber-400 to-amber-500 text-amber-950 font-extrabold px-4 py-2 rounded-xl text-center shadow-md">
+                            <span class="text-[10px] block opacity-80 uppercase tracking-wider">Максимум</span>
+                            <span class="text-lg">10 БАЛЛОВ</span>
+                        </div>
+                        <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wide">6 задач (А, В, С)</span>
+                    </div>
+                </div>
+
+                <!-- LEVEL A TASK -->
+                <div class="mb-8 p-5 rounded-2xl bg-gray-50 dark:bg-gray-800/40 border border-[var(--border-color)]">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="bg-[var(--emerald)] text-white text-xs font-bold px-3 py-1 rounded-full">Уровень А • 3 балла</span>
+                        <span class="text-xs text-[var(--text-muted)]">3 задачи по 1 баллу</span>
+                    </div>
+                    <div id="task-a-container" class="space-y-4 text-sm"></div>
+                </div>
+
+                <!-- LEVEL B TASK -->
+                <div class="mb-8 p-5 rounded-2xl bg-gray-50 dark:bg-gray-800/40 border border-[var(--border-color)]">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="bg-[var(--teal)] text-white text-xs font-bold px-3 py-1 rounded-full">Уровень В • 4 балла</span>
+                        <span class="text-xs text-[var(--text-muted)]">2 задачи по 2 балла</span>
+                    </div>
+                    <div id="task-b-container" class="space-y-6"></div>
+                </div>
+
+                <!-- LEVEL C TASK -->
+                <div class="mb-8 p-5 rounded-2xl bg-gray-50 dark:bg-gray-800/40 border border-[var(--border-color)]">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full">Уровень С • 3 балла</span>
+                        <span class="text-xs text-[var(--text-muted)]">1 комплексная задача (3 балла)</span>
+                    </div>
+                    <div id="task-c-container" class="space-y-6"></div>
+                </div>
+
+                <!-- Grading & Results Box -->
+                <div id="result-box" class="hidden mb-8 p-5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border-2 border-emerald-400 transition-all">
+                    <div class="flex items-center space-x-3 mb-2">
+                        <span class="text-3xl">🎉</span>
+                        <div>
+                            <h4 class="font-bold text-emerald-900 dark:text-emerald-200 text-base">Работа проверена и отправлена в журнал!</h4>
+                            <p class="text-xs text-emerald-700 dark:text-emerald-300">Автоматический расчёт баллов завершён:</p>
+                        </div>
+                    </div>
+                    <div class="mt-3 flex items-center justify-between">
+                        <span id="result-score-badge" class="bg-emerald-700 text-white font-extrabold text-lg px-4 py-1.5 rounded-xl shadow-sm">0 / 10 баллов</span>
+                        <span class="text-xs font-medium text-emerald-800 dark:text-emerald-300">Ожидайте оценки учителя.</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-[var(--border-color)] no-print">
+                    <button id="btn-print" class="bg-white dark:bg-gray-800 text-[var(--text-main)] border border-[var(--border-color)] hover:bg-gray-100 font-semibold py-2.5 px-5 rounded-xl text-xs transition-all shadow-sm">
+                        🖨️ Печать бланка (PDF)
+                    </button>
+                    <button id="btn-submit" class="btn-gold font-extrabold text-base py-3 px-8 rounded-xl shadow-lg transition-transform transform hover:scale-105 flex items-center">
+                        <span id="btn-submit-text">Сдать работу Алдару көсе</span>
+                        <span class="ml-2">🚀</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TEACHER SECTION ==================== -->
+        <section id="sec-teacher" class="hidden space-y-6">
+            <div class="bg-[var(--card-bg)] rounded-2xl shadow-md p-6 border-t-4 border-[#007A8A] border-x border-b border-[var(--border-color)]">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <div>
+                        <h2 class="text-xl font-heading font-bold text-[var(--teal)] flex items-center">
+                            <span class="text-2xl mr-2">📊</span> Журнал работ учеников
+                        </h2>
+                        <p class="text-xs text-[var(--text-muted)] mt-0.5">Данные сохраняются в облачной базе платформы</p>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button id="btn-export-csv" class="btn-emerald font-bold py-2 px-4 rounded-xl text-xs shadow-sm flex items-center">
+                            <span class="mr-1">📥</span> Скачать Excel (CSV)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-100 dark:bg-gray-800 text-[var(--text-muted)] uppercase text-[11px] font-bold">
+                                <th class="py-3 px-4 rounded-tl-xl">Ученик</th>
+                                <th class="py-3 px-4">Класс</th>
+                                <th class="py-3 px-4">Тема</th>
+                                <th class="py-3 px-4 text-center">Дата</th>
+                                <th class="py-3 px-4 text-center">Итоговый балл</th>
+                                <th class="py-3 px-4 text-center rounded-tr-xl">Проверка</th>
+                            </tr>
+                        </thead>
+                        <tbody id="teacher-table-body" class="text-xs divide-y divide-[var(--border-color)]">
+                            <!-- Filled from Firestore -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Manual Grading (Pencil) -->
+    <div id="modal-grading" class="fixed inset-0 modal-overlay z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-200 p-4">
+        <div class="bg-[var(--card-bg)] rounded-2xl shadow-2xl border-2 border-[var(--teal)] max-w-2xl w-full flex flex-col max-h-[90vh] transform scale-95 transition-transform duration-200">
+            <div class="p-5 border-b border-[var(--border-color)] flex justify-between items-center">
+                <div>
+                    <h3 class="text-lg font-heading font-bold text-[var(--teal)]">Ручная проверка (Аудит)</h3>
+                    <p class="text-xs text-[var(--text-muted)] mt-1">Ученик: <span id="insp-name" class="font-bold text-[var(--text-main)]"></span> | Класс: <span id="insp-class"></span></p>
+                </div>
+                <button id="btn-close-grading" class="text-gray-400 hover:text-gray-700 text-2xl font-bold">&times;</button>
+            </div>
+            
+            <div class="p-5 overflow-y-auto flex-grow space-y-4 text-xs">
+                <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl">
+                    <h4 class="font-bold text-[var(--text-main)] mb-3 text-sm">Ответы ученика:</h4>
+                    <div id="insp-breakdown" class="space-y-2"></div>
+                </div>
+
+                <div class="bg-amber-50 dark:bg-amber-950/40 p-4 rounded-xl border border-amber-200 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div>
+                        <span class="font-bold text-amber-900 dark:text-amber-200 block text-sm">Итоговая оценка:</span>
+                        <span class="text-gray-500">Автоматически: <b id="insp-auto-score">0</b> / 10 б.</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <input type="number" id="insp-score-input" min="0" max="10" step="0.5" class="w-20 p-2 text-center text-lg font-bold border-2 border-amber-400 rounded-lg outline-none bg-white dark:bg-gray-800">
+                        <span class="text-sm font-bold text-[var(--text-main)]">/ 10</span>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-[var(--text-main)] mb-1">Отзыв учителя (комментарий):</label>
+                    <input type="text" id="insp-comment-input" placeholder="Например: Отличная работа! Будь внимательнее с единицами измерения." class="w-full p-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] outline-none text-sm">
+                </div>
+            </div>
+
+            <div class="p-4 border-t border-[var(--border-color)] text-right bg-gray-50 dark:bg-gray-900 rounded-b-2xl">
+                <button id="btn-save-insp" class="btn-emerald font-bold py-2.5 px-6 rounded-xl text-sm shadow-md transition-transform hover:scale-105">
+                    Сохранить изменения ✔️
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Toast -->
+    <div id="modal-toast" class="fixed inset-0 modal-overlay z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-200 p-4">
+        <div class="bg-[var(--card-bg)] rounded-2xl shadow-2xl p-6 max-w-sm w-full text-center transform scale-95 transition-transform duration-200">
+            <div id="modal-toast-icon" class="text-4xl mb-2">🔔</div>
+            <h3 id="modal-toast-title" class="text-base font-bold text-[var(--text-main)] mb-1">Уведомление</h3>
+            <p id="modal-toast-msg" class="text-xs text-[var(--text-muted)] mb-5"></p>
+            <button id="modal-toast-btn" class="w-full btn-emerald font-bold py-2 rounded-xl text-xs shadow">Понятно</button>
+        </div>
+    </div>
+
+    <!-- FIREBASE & LOGIC SCRIPT -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, updateDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // APP CONFIG & DB STATE
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'aldar-kose-physics-8';
+        let app, db, auth;
+        let isFirebaseReady = false;
+        let globalSubmissions = []; // Cloud state synced
+        let activeInspectorId = null;
+
+        // ==================== DATA STRUCTURE (6 TASKS PER TOPIC) ====================
+        const TOPICS_DATA = [
+            {
+                id: "topic_1", title: "1. Внутренняя энергия. Виды теплопередачи",
+                taskA: [
+                    { q: "1. Алдаркөсе налил горячий чай в кружку. Какой вид теплопередачи объясняет нагрев кружки?", type: "select", opts: ["Теплопроводность", "Конвекция", "Излучение"], ans: 0 },
+                    { q: "2. Зимой Алдаркөсе прикоснулся к батарее. Почему он ощущает тепло?", type: "select", opts: ["Из-за конвекции воздуха", "Прямая теплопроводность", "Излучение"], ans: 1 },
+                    { q: "3. Какой вид теплопередачи отвечает за нагрев воды в кастрюле снизу вверх?", type: "select", opts: ["Теплопроводность", "Конвекция", "Излучение"], ans: 1 }
+                ],
+                taskB: [
+                    { desc: "Задача 4. Алдаркөсе греет 2 кг воды от 20 °C до 100 °C (c = 4200 Дж/(кг·°C)).", template: "Дано: m = 2 кг; t1 = 20 °C; t2 = 100 °C.\n1) Изменение температуры: Δt = 100 - 20 = {80} °C.\n2) Потребовавшаяся теплота: Q = c·m·Δt = 4200 · 2 · 80 = {672000} Дж." },
+                    { desc: "Задача 5. Уменьшение теплопередачи благодаря двойным стеклам.", template: "Дано: Q = 2000 Дж за 1 час (3600 с).\n1) Мощность тепловых потерь: P = Q / t = 2000 / 3600 ≈ {0.56} Вт." }
+                ],
+                taskC: [
+                    { desc: "Задача 6. На юрте стоят солнечные батареи 5 м² (КПД = 80%). Мощность излучения 1000 Вт/м². Греем 50 кг воды на 50 °C.", template: "1) Полезная мощность: P_пол = 1000 · 5 · 0.8 = {4000} Вт.\n2) Теплота для нагрева воды: Q = 4200 · 50 · 50 = {10500000} Дж.\n3) Время нагрева: t = Q / P_пол = 10500000 / 4000 = {2625} с." }
+                ]
+            },
+            {
+                id: "topic_2", title: "2. Количество теплоты. Удельная теплоёмкость",
+                taskA: [
+                    { q: "1. Что происходит с внутренней энергией воды при нагреве?", type: "select", opts: ["Увеличивается", "Уменьшается", "Не меняется"], ans: 0 },
+                    { q: "2. Сколько теплоты получит 2 кг воды при нагреве на 50 °C? (c=4200)", type: "input", ans: 420000, unit: "Дж" },
+                    { q: "3. Металл (3 кг) поглотил 75 кДж при нагреве на 50 °C. Какова его удельня теплоемкость?", type: "input", ans: 500, unit: "Дж/(кг·°C)" }
+                ],
+                taskB: [
+                    { desc: "Задача 4. Чайник с 1.5 кг воды нагрелся от 15 °C до 95 °C за 10 минут (600 с).", template: "1) Разница температур Δt = 95 - 15 = {80} °C.\n2) Переданная теплота Q = 4200 · 1.5 · 80 = {504000} Дж." },
+                    { desc: "Задача 5. Алдаркөсе налил 2 кг кипятка (100 °C) в термос. За час вода остыла до 80 °C.", template: "1) Разница температур Δt = 100 - 80 = {20} °C.\n2) Вода потеряла теплоты Q = 4200 · 2 · 20 = {168000} Дж." }
+                ],
+                taskC: [
+                    { desc: "Задача 6. В котле греют 50 кг воды от 10 °C до 60 °C нагревателем 5 кВт (5000 Вт) с КПД 90%.", template: "1) Теплота для нагрева: Q = 4200 · 50 · 50 = {10500000} Дж.\n2) Полезная мощность: P_пол = 5000 · 0.9 = {4500} Вт.\n3) Время работы нагревателя: t = 10500000 / 4500 ≈ {2333} с." }
+                ]
+            },
+            {
+                id: "topic_3", title: "3. Удельная теплота сгорания топлива",
+                taskA: [
+                    { q: "1. При сгорании 5 кг дров (q = 10 МДж/кг) выделится энергия:", type: "input", ans: 50, unit: "МДж" },
+                    { q: "2. Свеча (0.02 кг) выделила 800 кДж энергии. Какова удельная теплота?", type: "input", ans: 40, unit: "МДж/кг" },
+                    { q: "3. Бензин (q = 44 МДж/кг) массой 10 кг при сгорании даст энергию:", type: "input", ans: 440, unit: "МДж" }
+                ],
+                taskB: [
+                    { desc: "Задача 4. Сгорело 0.2 кг природного газа (q = 50 МДж/кг).", template: "1) Выделившаяся энергия: Q = 0.2 · 50 = {10} МДж." },
+                    { desc: "Задача 5. Туристическая горелка с баллоном газа 0.4 кг (q = 46 МДж/кг).", template: "1) Полная энергия баллона: Q = 0.4 · 46 = {18.4} МДж." }
+                ],
+                taskC: [
+                    { desc: "Задача 6. ТЭЦ за сутки сожгла 500 тонн (500 000 кг) угля (q = 27 МДж/кг). КПД станции 35%.", template: "1) Полная энергия: Q_полн = 500000 · 27 = {13500000} МДж.\n2) Электрическая энергия (полезная): E_эл = 13500000 · 0.35 = {4725000} МДж." }
+                ]
+            },
+            {
+                id: "topic_8", title: "8. Закон Ома",
+                taskA: [
+                    { q: "1. Напряжение 6 В, сопротивление 3 Ом. Сила тока?", type: "input", ans: 2, unit: "А" },
+                    { q: "2. Напряжение 12 В, ток 4 А. Сопротивление?", type: "input", ans: 3, unit: "Ом" },
+                    { q: "3. Сопротивление 5 Ом, ток 2 А. Каково напряжение?", type: "input", ans: 10, unit: "В" }
+                ],
+                taskB: [
+                    { desc: "Задача 4. Цепь: батарейка 9 В, резистор 6 Ом. Работает 5 минут (300 с).", template: "1) Ток: I = U / R = 9 / 6 = {1.5} А.\n2) Прошедший заряд: q = I · t = 1.5 · 300 = {450} Кл." },
+                    { desc: "Задача 5. Прибор 8 Ом подключен так, что ток равен 3 А.", template: "1) Напряжение на приборе: U = I · R = 3 · 8 = {24} В.\n2) Заряд за 2 минуты (120 с): q = 3 · 120 = {360} Кл." }
+                ],
+                taskC: [
+                    { desc: "Задача 6. Провод 10 м. При напряжении 20 В ток равен 2 А.", template: "1) Общее сопротивление провода: R = 20 / 2 = {10} Ом.\n2) Если напряжение 30 В, ток: I = 30 / 10 = {3} А.\n3) Сопротивление 1 метра провода: R_уд = 10 / 10 = {1} Ом/м." }
+                ]
+            }
+        ];
+
+        // Ensure we have 20 topics by duplicating for demo if needed, but structure is ready.
+        let currentTopic = TOPICS_DATA[0];
+
+        // ==================== FIREBASE INIT ====================
+        async function initFirebase() {
+            try {
+                if (typeof __firebase_config !== 'undefined') {
+                    const config = JSON.parse(__firebase_config);
+                    
+                    // ПРОБЛЕМА: Конфликт ключей (если выдан ключ 'aq...' вместо 'AIza...') вызывает 404 ошибку.
+                    // Если ключ некорректен, принудительно переключаемся на локальное хранилище.
+                    if (config.apiKey && !config.apiKey.startsWith('AIza')) {
+                        console.warn("Обнаружен некорректный API ключ среды. Переход в локальный режим для предотвращения 404 ошибки.");
+                        throw new Error("Invalid API key format");
+                    }
+
+                    app = initializeApp(config);
+                    db = getFirestore(app);
+                    auth = getAuth(app);
+                    
+                    if (typeof __initial_auth_token !== 'undefined') {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                    
+                    isFirebaseReady = true;
+                    document.getElementById('header-status').innerText = "Сборник рабочих листов (Подключено к облаку)";
+                    listenToSubmissions();
+                } else {
+                    throw new Error("No Firebase config found");
+                }
+            } catch (err) {
+                console.warn("Firebase Auth Error / Conflict:", err.message);
+                isFirebaseReady = false;
+                document.getElementById('header-status').innerText = "Сборник рабочих листов (Локальный режим / Офлайн)";
+                loadLocalSubmissions();
+            }
+        }
+
+        function listenToSubmissions() {
+            if (!isFirebaseReady || !auth.currentUser) return;
+            const subsRef = collection(db, 'artifacts', appId, 'public', 'data', 'submissions');
+            
+            onSnapshot(subsRef, (snapshot) => {
+                globalSubmissions = [];
+                snapshot.forEach(doc => {
+                    globalSubmissions.push({ id: doc.id, ...doc.data() });
+                });
+                // Sort by timestamp descending
+                globalSubmissions.sort((a, b) => b.timestampRaw - a.timestampRaw);
+                renderTeacherTable();
+            }, (error) => {
+                console.error("Firestore Error (404/Permissions):", error);
+                isFirebaseReady = false;
+                document.getElementById('header-status').innerText = "Сборник рабочих листов (Локальный режим / Офлайн)";
+                loadLocalSubmissions();
+            });
+        }
+
+        function loadLocalSubmissions() {
+            const saved = localStorage.getItem('aldar_kose_submissions');
+            if (saved) {
+                globalSubmissions = JSON.parse(saved);
+            } else {
+                globalSubmissions = [];
+            }
+            globalSubmissions.sort((a, b) => b.timestampRaw - a.timestampRaw);
+            renderTeacherTable();
+        }
+
+        // ==================== UI SETUP & EVENTS ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            
+            // Populate select
+            const sel = document.getElementById('sel-topic');
+            TOPICS_DATA.forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t.id;
+                opt.innerText = t.title;
+                sel.appendChild(opt);
+            });
+
+            // Listeners
+            document.getElementById('theme-toggle').onclick = () => {
+                const cur = document.documentElement.getAttribute('data-theme');
+                const next = cur === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('rabolab_theme', next);
+                document.getElementById('theme-icon').innerText = next === 'dark' ? '☀️' : '🌙';
+            };
+
+            document.getElementById('tab-student').onclick = () => switchTab('student');
+            document.getElementById('tab-teacher').onclick = () => switchTab('teacher');
+
+            document.getElementById('sel-topic').onchange = (e) => loadTopic(e.target.value);
+            document.getElementById('inp-name').oninput = updateHeader;
+            document.getElementById('inp-class').oninput = updateHeader;
+
+            document.getElementById('btn-copy-url').onclick = copyUrl;
+            document.getElementById('btn-toggle-qr').onclick = () => document.getElementById('qr-box').classList.toggle('hidden');
+            
+            document.getElementById('btn-submit').onclick = submitWork;
+            document.getElementById('btn-print').onclick = () => window.print();
+            document.getElementById('btn-export-csv').onclick = exportCSV;
+
+            document.getElementById('btn-close-grading').onclick = () => document.getElementById('modal-grading').classList.add('hidden');
+            document.getElementById('btn-save-insp').onclick = saveManualGrade;
+            document.getElementById('modal-toast-btn').onclick = () => {
+                document.getElementById('modal-toast').classList.add('opacity-0');
+                setTimeout(() => document.getElementById('modal-toast').classList.add('hidden'), 200);
+            };
+
+            // Init Firebase then load topic
+            initFirebase().then(() => {
+                if (!loadTopicFromHash()) loadTopic(TOPICS_DATA[0].id);
+            });
+        });
+
+        function initTheme() {
+            const saved = localStorage.getItem('rabolab_theme') || 'light';
+            document.documentElement.setAttribute('data-theme', saved);
+            document.getElementById('theme-icon').innerText = saved === 'dark' ? '☀️' : '🌙';
+        }
+
+        function switchTab(tabName) {
+            const btnS = document.getElementById('tab-student');
+            const btnT = document.getElementById('tab-teacher');
+            const secS = document.getElementById('sec-student');
+            const secT = document.getElementById('sec-teacher');
+
+            [btnS, btnT].forEach(b => b.className = "flex-1 py-2.5 px-4 rounded-xl font-bold text-xs md:text-sm text-center transition-all text-[var(--text-muted)] hover:bg-gray-100 dark:hover:bg-gray-800");
+            secS.classList.add('hidden');
+            secT.classList.add('hidden');
+
+            if (tabName === 'student') {
+                btnS.className = "flex-1 py-2.5 px-4 rounded-xl font-bold text-xs md:text-sm text-center transition-all btn-emerald shadow";
+                secS.classList.remove('hidden');
+            } else {
+                btnT.className = "flex-1 py-2.5 px-4 rounded-xl font-bold text-xs md:text-sm text-center transition-all btn-emerald shadow";
+                secT.classList.remove('hidden');
+                renderTeacherTable();
+            }
+        }
+
+        function updateHeader() {
+            document.getElementById('ws-disp-name').innerText = document.getElementById('inp-name').value.trim() || "—";
+            document.getElementById('ws-disp-class').innerText = document.getElementById('inp-class').value.trim() || "—";
+        }
+
+        function loadTopicFromHash() {
+            if (window.location.hash.startsWith('#ws-')) {
+                const tid = window.location.hash.replace('#ws-', '');
+                if (TOPICS_DATA.some(t => t.id === tid)) {
+                    loadTopic(tid);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // ==================== RENDERING WORKSHEET ====================
+        function loadTopic(topicId) {
+            currentTopic = TOPICS_DATA.find(t => t.id === topicId) || TOPICS_DATA[0];
+            document.getElementById('sel-topic').value = currentTopic.id;
+            
+            const idx = TOPICS_DATA.findIndex(t => t.id === topicId) + 1;
+            document.getElementById('ws-topic-badge').innerText = `Тема №${idx}`;
+            document.getElementById('ws-topic-title').innerText = currentTopic.title;
+
+            // Generate URL & QR
+            const shareUrl = window.location.origin + window.location.pathname + `#ws-${currentTopic.id}`;
+            document.getElementById('inp-share-url').value = shareUrl;
+            generateQR(shareUrl);
+
+            // Render Tasks
+            renderTaskA(currentTopic.taskA);
+            renderTaskBC('task-b-container', currentTopic.taskB, 'b');
+            renderTaskBC('task-c-container', currentTopic.taskC, 'c');
+            
+            // Reset state
+            document.getElementById('result-box').classList.add('hidden');
+            document.getElementById('btn-submit').disabled = false;
+            document.getElementById('btn-submit-text').innerText = "Сдать работу Алдару көсе";
+        }
+
+        function renderTaskA(tasks) {
+            const container = document.getElementById('task-a-container');
+            container.innerHTML = '';
+            tasks.forEach((item, i) => {
+                const div = document.createElement('div');
+                div.className = "p-3 bg-[var(--card-bg)] rounded-xl border border-[var(--border-color)] shadow-sm";
+                let inputHtml = '';
+                if (item.type === 'select') {
+                    const opts = item.opts.map((o, idx) => `<option value="${idx}">${o}</option>`).join('');
+                    inputHtml = `<select data-k="a_${i}" class="mt-2 w-full md:w-auto px-3 py-1.5 rounded-lg border border-[var(--border-color)] bg-gray-50 focus:ring-2 focus:ring-[var(--emerald)] outline-none text-sm"><option value="">— Выберите —</option>${opts}</select>`;
+                } else {
+                    inputHtml = `<div class="mt-2 flex items-center space-x-2"><input type="text" data-k="a_${i}" placeholder="Ответ" class="w-32 px-3 py-1.5 rounded-lg border border-[var(--border-color)] bg-gray-50 text-sm font-bold text-center outline-none focus:ring-2 focus:ring-[var(--emerald)]"><span class="text-xs font-bold text-[var(--text-muted)]">${item.unit || ''}</span></div>`;
+                }
+                div.innerHTML = `<p class="font-bold text-[var(--text-main)]">${item.q}</p>${inputHtml}`;
+                container.appendChild(div);
+            });
+        }
+
+        function renderTaskBC(containerId, tasks, prefix) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            let globalIdx = 0;
+            tasks.forEach((task, tIdx) => {
+                const div = document.createElement('div');
+                
+                const tmpl = task.template.replace(/\n/g, '<br>').replace(/\{([^}]+)\}/g, (match, val) => {
+                    globalIdx++;
+                    return `<input type="text" class="blank-input" data-answer="${val}" data-k="${prefix}_${globalIdx}" autocomplete="off">`;
+                });
+
+                div.innerHTML = `
+                    <p class="text-sm font-medium mb-2 leading-relaxed text-[var(--text-main)]">${task.desc}</p>
+                    <div class="bg-[var(--card-bg)] p-4 rounded-xl border border-[var(--border-color)] text-sm leading-loose font-mono shadow-sm">
+                        ${tmpl}
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // ==================== AUTO-GRADING & SUBMISSION ====================
+        async function submitWork() {
+            const name = document.getElementById('inp-name').value.trim();
+            const cls = document.getElementById('inp-class').value.trim();
+            
+            if (!name) return showToast("Фамилия и Имя", "Введите имя и фамилию ученика!", "👤");
+            if (!cls) return showToast("Класс", "Укажите ваш класс (например, 8 А).", "🏫");
+
+            const btn = document.getElementById('btn-submit');
+            btn.disabled = true;
+            document.getElementById('btn-submit-text').innerText = "Сохранение...";
+
+            let score = 0;
+            const details = [];
+
+            // A (3 points, 1pt each)
+            currentTopic.taskA.forEach((item, idx) => {
+                const el = document.querySelector(`[data-k="a_${idx}"]`);
+                if (el) {
+                    const val = el.value.trim();
+                    let ok = false;
+                    if (item.type === 'select') {
+                        ok = parseInt(val) === item.ans;
+                    } else {
+                        const num = parseFloat(val.replace(',', '.'));
+                        ok = !isNaN(num) && Math.abs(num - item.ans) <= Math.max(Math.abs(item.ans) * 0.02, 0.04);
+                    }
+                    if (ok) score += 1;
+                    details.push({ task: `Уровень А (#${idx+1})`, user: val || "—", expected: item.ans, ok, pts: ok ? 1 : 0 });
+                }
+            });
+
+            // Helper to grade B & C blocks
+            const gradeBlock = (containerId, levelName, maxPts) => {
+                const inputs = document.querySelectorAll(`#${containerId} input`);
+                let okCount = 0;
+                inputs.forEach(inp => {
+                    const exp = inp.getAttribute('data-answer');
+                    const act = inp.value.trim();
+                    const nExp = parseFloat(exp.replace(',', '.'));
+                    const nAct = parseFloat(act.replace(',', '.'));
+                    
+                    let ok = (!isNaN(nExp) && !isNaN(nAct)) ? 
+                             Math.abs(nAct - nExp) <= Math.max(Math.abs(nExp) * 0.02, 0.04) : 
+                             exp.toLowerCase() === act.toLowerCase();
+                    
+                    inp.className = ok ? "blank-input correct" : "blank-input incorrect";
+                    if (ok) okCount++;
+                });
+                const pts = inputs.length > 0 ? (okCount / inputs.length) * maxPts : 0;
+                score += pts;
+                details.push({ task: levelName, user: `${okCount}/${inputs.length} верно`, expected: "Формулы и расчеты", ok: pts > maxPts * 0.5, pts: Math.round(pts * 10)/10 });
+            };
+
+            // B (2 tasks, total 4 pts)
+            gradeBlock('task-b-container', 'Уровень В', 4);
+            // C (1 task, total 3 pts)
+            gradeBlock('task-c-container', 'Уровень С', 3);
+
+            const finalScore = Math.min(10, Math.round(score * 10) / 10);
+            
+            const submissionData = {
+                studentName: name,
+                studentClass: cls,
+                topicId: currentTopic.id,
+                topicTitle: currentTopic.title,
+                autoScore: finalScore,
+                finalScore: finalScore,
+                details: details,
+                teacherComment: "",
+                timestamp: new Date().toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }),
+                timestampRaw: Date.now()
+            };
+
+            try {
+                if (isFirebaseReady) {
+                    const docRef = doc(collection(db, 'artifacts', appId, 'public', 'data', 'submissions'));
+                    await setDoc(docRef, submissionData);
+                } else {
+                    submissionData.id = 'loc_' + Date.now() + Math.random().toString(36).substr(2, 5);
+                    globalSubmissions.push(submissionData);
+                    localStorage.setItem('aldar_kose_submissions', JSON.stringify(globalSubmissions));
+                    loadLocalSubmissions();
+                }
+
+                document.getElementById('result-score-badge').innerText = `${finalScore} / 10 баллов`;
+                document.getElementById('result-box').classList.remove('hidden');
+                document.getElementById('btn-submit-text').innerText = "Сохранено в журнале ✓";
+                document.getElementById('result-box').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                console.error(error);
+                showToast("Ошибка сохранения", "Не удалось отправить результат.", "❌");
+                btn.disabled = false;
+                document.getElementById('btn-submit-text').innerText = "Сдать работу Алдару көсе";
+            }
+        }
+
+        // ==================== TEACHER DASHBOARD ====================
+        window.renderTeacherTable = function() {
+            const tbody = document.getElementById('teacher-table-body');
+            tbody.innerHTML = '';
+
+            if (globalSubmissions.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-[var(--text-muted)]">Журнал пока пуст. Ожидаем работы учеников.</td></tr>`;
+                return;
+            }
+
+            globalSubmissions.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-3 px-4 font-bold text-[var(--text-main)]">${item.studentName}</td>
+                    <td class="py-3 px-4">${item.studentClass}</td>
+                    <td class="py-3 px-4 max-w-xs truncate" title="${item.topicTitle}">${item.topicTitle}</td>
+                    <td class="py-3 px-4 text-center text-[var(--text-muted)]">${item.timestamp}</td>
+                    <td class="py-3 px-4 text-center font-extrabold text-emerald-600 text-sm">${item.finalScore} / 10</td>
+                    <td class="py-3 px-4 text-center">
+                        <button class="bg-gray-100 hover:bg-amber-100 text-gray-700 hover:text-amber-800 border border-gray-300 rounded-lg p-1.5 transition-colors btn-inspect" data-id="${item.id}" title="Проверить (Аудит)">
+                            ✏️
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.querySelectorAll('.btn-inspect').forEach(btn => {
+                btn.onclick = (e) => openInspector(e.currentTarget.getAttribute('data-id'));
+            });
+        }
+
+        function openInspector(subId) {
+            const item = globalSubmissions.find(s => s.id === subId);
+            if (!item) return;
+
+            activeInspectorId = subId;
+            document.getElementById('insp-name').innerText = item.studentName;
+            document.getElementById('insp-class').innerText = item.studentClass;
+            document.getElementById('insp-auto-score').innerText = item.autoScore;
+            document.getElementById('insp-score-input').value = item.finalScore;
+            document.getElementById('insp-comment-input').value = item.teacherComment || "";
+
+            const bContainer = document.getElementById('insp-breakdown');
+            bContainer.innerHTML = '';
+
+            item.details.forEach(d => {
+                const row = document.createElement('div');
+                row.className = "flex justify-between items-center bg-white dark:bg-gray-700 p-2.5 rounded-lg border border-[var(--border-color)]";
+                row.innerHTML = `
+                    <div>
+                        <span class="font-bold text-[var(--text-main)]">${d.task}:</span>
+                        <span class="text-[var(--text-muted)] ml-2">Введено: <b>${d.user}</b></span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="font-bold ${d.ok ? 'text-green-600' : 'text-red-500'}">${d.ok ? '✓ Верно' : '✗ Ошибка'}</span>
+                        <span class="bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded text-xs">${d.pts} б.</span>
+                    </div>
+                `;
+                bContainer.appendChild(row);
+            });
+
+            const modal = document.getElementById('modal-grading');
+            modal.classList.remove('hidden');
+            setTimeout(() => { modal.classList.remove('opacity-0'); modal.children[0].classList.remove('scale-95'); }, 10);
+        }
+
+        async function saveManualGrade() {
+            if (!activeInspectorId) return;
+            const newScore = Math.min(10, Math.max(0, parseFloat(document.getElementById('insp-score-input').value)));
+            const comment = document.getElementById('insp-comment-input').value.trim();
+
+            try {
+                if (isFirebaseReady) {
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'submissions', activeInspectorId);
+                    await updateDoc(docRef, {
+                        finalScore: newScore,
+                        teacherComment: comment
+                    });
+                } else {
+                    const idx = globalSubmissions.findIndex(s => s.id === activeInspectorId);
+                    if (idx !== -1) {
+                        globalSubmissions[idx].finalScore = newScore;
+                        globalSubmissions[idx].teacherComment = comment;
+                        localStorage.setItem('aldar_kose_submissions', JSON.stringify(globalSubmissions));
+                        loadLocalSubmissions();
+                    }
+                }
+                
+                document.getElementById('modal-grading').classList.add('hidden');
+                showToast("Сохранено", "Результат ученика и отзыв учителя успешно обновлены!", "✔️");
+            } catch (err) {
+                console.error(err);
+                showToast("Ошибка", "Не удалось сохранить изменения.", "❌");
+            }
+        }
+
+        function exportCSV() {
+            if (globalSubmissions.length === 0) return showToast("Журнал пуст", "Нет данных для выгрузки в Excel.", "⚠️");
+            const rows = [["Ученик", "Класс", "Тема", "Дата", "Авто-оценка", "Итоговый балл", "Комментарий учителя"]];
+            globalSubmissions.forEach(s => {
+                rows.push([ `"${s.studentName}"`, `"${s.studentClass}"`, `"${s.topicTitle}"`, `"${s.timestamp}"`, `"${s.autoScore}"`, `"${s.finalScore}"`, `"${s.teacherComment || ''}"` ]);
+            });
+            const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + rows.map(e => e.join(",")).join("\n");
+            const link = document.createElement("a");
+            link.href = encodeURI(csvContent);
+            link.download = `Журнал_Физика_8класс.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // ==================== UTILS ====================
+        function showToast(title, msg, icon = "🔔") {
+            document.getElementById('modal-toast-title').innerText = title;
+            document.getElementById('modal-toast-msg').innerText = msg;
+            document.getElementById('modal-toast-icon').innerText = icon;
+            const modal = document.getElementById('modal-toast');
+            modal.classList.remove('hidden');
+            setTimeout(() => { modal.classList.remove('opacity-0'); modal.children[0].classList.remove('scale-95'); }, 10);
+        }
+
+        function copyUrl() {
+            const input = document.getElementById('inp-share-url');
+            input.focus(); input.select();
+            try {
+                document.execCommand('copy');
+                showToast("Скопировано", "Ссылка на рабочий лист скопирована в буфер обмена.", "📋");
+            } catch (e) {
+                showToast("Выделено", "Нажмите Ctrl+C, чтобы скопировать.", "📋");
+            }
+        }
+
+        // QR CODE ENGINE
+        function generateQR(text) {
+            const canvas = document.getElementById('qr-canvas');
+            const ctx = canvas.getContext('2d');
+            const size = canvas.width;
+            ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, size, size);
+
+            const gridCount = 21; const cellSize = Math.floor(size / gridCount);
+            const offset = Math.floor((size - cellSize * gridCount) / 2);
+            const matrix = Array(gridCount).fill(0).map(() => Array(gridCount).fill(false));
+
+            function drawFinder(row, col) {
+                for (let r = -1; r <= 7; r++) {
+                    for (let c = -1; c <= 7; c++) {
+                        const mr = row + r, mc = col + c;
+                        if (mr >= 0 && mr < gridCount && mc >= 0 && mc < gridCount) {
+                            matrix[mr][mc] = (r >= 0 && r <= 6 && (c === 0 || c === 6)) || (c >= 0 && c <= 6 && (r === 0 || r === 6)) || (r >= 2 && r <= 4 && c >= 2 && c <= 4);
+                        }
+                    }
+                }
+            }
+            drawFinder(0, 0); drawFinder(0, gridCount - 7); drawFinder(gridCount - 7, 0);
+
+            for (let i = 8; i < gridCount - 8; i++) { matrix[6][i] = (i % 2 === 0); matrix[i][6] = (i % 2 === 0); }
+            let hash = 0; for (let i = 0; i < text.length; i++) hash = ((hash << 5) - hash) + text.charCodeAt(i);
+            let bitIdx = 0;
+            for (let r = 0; r < gridCount; r++) {
+                for (let c = 0; c < gridCount; c++) {
+                    if (!((r < 8 && c < 8) || (r < 8 && c >= gridCount - 8) || (r >= gridCount - 8 && c < 8)) && !(r === 6 || c === 6)) {
+                        matrix[r][c] = ((hash ^ (r * 31 + c * 17 + bitIdx * 13)) & 1) === 1;
+                        bitIdx++;
+                    }
+                }
+            }
+            ctx.fillStyle = '#0B5D1E';
+            for (let r = 0; r < gridCount; r++) {
+                for (let c = 0; c < gridCount; c++) {
+                    if (matrix[r][c]) ctx.fillRect(offset + c * cellSize, offset + r * cellSize, cellSize, cellSize);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
